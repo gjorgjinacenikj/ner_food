@@ -20,7 +20,6 @@ def NER_driver(fold = None, vectorizer_model_name='lexical_300'):
     max_sentence_length = 50
     EPOCHS = 1000
     BATCH_SIZE = 256
-    # EMBEDDING = 40
     # pre_proc = "lemma"
     missing_values_handled = False
     pre_proc = "none"
@@ -151,7 +150,7 @@ if __name__ == "__main__":
     parser.add_argument("--fold", type = int, dest = "which_fold", default = None)
     args = parser.parse_args()
 
-    for vectorizer in ['glove-twitter-25','glove-twitter-100','glove-twitter-200', 'glove-wiki-gigaword-50']:
+    for vectorizer in ['lexical_300', 'glove-wiki-gigaword-300', 'fasttext-wiki-news-subwords-300', 'word2vec-google-news-300']:
         NER_driver(args.which_fold, vectorizer)
 
 

@@ -12,17 +12,14 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from sklearn.metrics import classification_report
 
-def NER_driver(fold = None):
+def NER_driver(fold = None, vectorizer_model_name='lexical_300'):
 
     # --------------SETTINGS-------------
 
     max_sentence_length = 50
     EPOCHS = 1000
     BATCH_SIZE = 256
-    EMBEDDING = 40
-    # pre_proc = "none"
     pre_proc = "none"
-    vectorizer_model_name = 'lexical_300'
     missing_values_handled = False
     task_name = "food-classification"
     use_crf = True
@@ -131,6 +128,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog = "CRF_train")
     parser.add_argument("--fold", type = int, dest = "which_fold", default = None)
     args = parser.parse_args()
-
-    NER_driver(args.which_fold)
+    for vectorizer in ['lexical_300', 'glove-wiki-gigaword-300', 'fasttext-wiki-news-subwords-300', 'word2vec-google-news-300']:
+        NER_driver(args.which_fold, vectorizer)
 
