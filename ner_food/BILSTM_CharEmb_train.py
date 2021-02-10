@@ -1,6 +1,5 @@
 import argparse
 import os
-os.environ["HDF5_DISABLE_VERSION_CHECK"] = "1"
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from BILSTM_CharEmb_model import BILSTMDoubleInputModel, BILSTMCRFDoubleInputModel
 from utils import save_report_to_file, get_pred_and_ground_string, get_char_indices, \

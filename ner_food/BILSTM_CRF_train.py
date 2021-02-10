@@ -1,6 +1,5 @@
 import argparse
 import os
-os.environ["HDF5_DISABLE_VERSION_CHECK"] = "1"
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from BILSTM_CRF_model import BILSTMCRFModel, BILSTMModel
 

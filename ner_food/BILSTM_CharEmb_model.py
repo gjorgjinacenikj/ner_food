@@ -1,4 +1,3 @@
-import os
 from tf2crf import CRF
 from keras_preprocessing.sequence import pad_sequences
 import numpy as np
