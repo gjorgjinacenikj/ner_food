@@ -1,7 +1,7 @@
 import argparse
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-from BILSTM_CharEmb_model import BILSTMDoubleInputModel, BILSTMCRFDoubleInputModel
+from BILSTM_CharEmb_model import BILSTMCRFDoubleInputModel
 from utils import save_report_to_file, get_pred_and_ground_string, get_char_indices, \
     get_char_to_index_dict, get_word_to_index_mappings, get_tag_to_index_mappings, \
     read_data_for_task, aggregate_report_pkl, read_folds
@@ -22,7 +22,6 @@ def NER_driver(fold = None, vectorizer_model_name='lexical_300'):
     pre_proc = "none"
     missing_values_handled = False
     task_name = "food-classification"
-    use_crf = True
 
     # seeds
     seed = 42
@@ -47,13 +46,8 @@ def NER_driver(fold = None, vectorizer_model_name='lexical_300'):
     nltk.download('wordnet')
     lemmatizer = WordNetLemmatizer()
 
-
-    if use_crf:
-        model_instance = BILSTMCRFDoubleInputModel()
-        nn_model_name = "BILSTM_CharEmb_CRF"
-    else:
-        model_instance = BILSTMDoubleInputModel()
-        nn_model_name = "BILSTM_CharEmb"
+    model_instance = BILSTMCRFDoubleInputModel()
+    nn_model_name = "BILSTM_CharEmb_CRF"
         
 
     def lemmatize_df_index(df):

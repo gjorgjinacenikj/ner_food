@@ -1,14 +1,15 @@
 import copy
 
 import numpy as np
-from tensorflow.keras.layers import (LSTM,Input, Bidirectional, Dense, Embedding,
-                          SpatialDropout1D, TimeDistributed, concatenate)
-from tensorflow.keras.models import  Model
-from tensorflow.keras.utils import to_categorical
 from keras_preprocessing.sequence import pad_sequences
 from model_definition import models
+from tensorflow.keras.layers import (LSTM, Input, Bidirectional, Dense, Embedding,
+                                     TimeDistributed)
+from tensorflow.keras.models import Model
+from tensorflow.keras.utils import to_categorical
 from tf2crf import CRF
 from utils import SentenceGetter, get_embedding_weights, get_label
+
 
 class BILSTMCRFModel:
 
@@ -36,7 +37,6 @@ class BILSTMCRFModel:
 
         model = Bidirectional(LSTM(units=50, return_sequences=True, recurrent_dropout=0.1))(emb_word)
         model = TimeDistributed(Dense(50, activation='relu'))(model)
-        # print(dir(CRF))
         crf = CRF(n_tags + 1)
         out = crf(model)
 
